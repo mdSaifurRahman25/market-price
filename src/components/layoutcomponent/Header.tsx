@@ -2,6 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import Logo from '@/assets/logo-icon.png'
 import Navbar from './Navbar';
+import MarqueePage from './Marquee';
 
 const Header = () => {
   const date = new Date().toLocaleString('bn-BD', {
@@ -36,6 +37,9 @@ const Header = () => {
 
       {/* Navbar Component */}
       <Navbar />
+
+      {/* Marquee */}
+      <MarqueePage />
     </div>
   )
 }
