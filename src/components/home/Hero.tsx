@@ -21,7 +21,7 @@ const HeroSection = () => {
                 </div>
 
                 {/* Right Side */}
-                <div className="col-span-1">
+                <div className="col-span-1 flex justify-end">
                 <Image src={hero_image} alt="Hero Image" width={500} height={500} />
                 </div>
             </div>
