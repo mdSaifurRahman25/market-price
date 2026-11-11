@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+Assignment-07.fig
+AGENTS.md
+step.txt
