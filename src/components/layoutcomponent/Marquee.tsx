@@ -3,7 +3,6 @@ import Marquee from "react-fast-marquee";
 
 interface IMarquee {
   id: number;
-  slug: string;
   image: string;
   nameBn: string;
   today: number;
@@ -30,7 +29,7 @@ const MarqueePage = async () => {
           return (
             <div key={p.id} className="mx-3">
               <Link
-                href={`/product/${p.slug}`}
+                href={`/product/${p.id}`}
                 className="flex items-center gap-2 text-sm sm:text-base font-medium text-gray-800 hover:text-teal-700"
               >
                 <span>{p?.image}</span>

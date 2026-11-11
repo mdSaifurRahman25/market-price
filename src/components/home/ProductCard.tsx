@@ -2,7 +2,6 @@ import Link from "next/link";
 
 export interface IProduct {
   id: number;
-  slug: string;
   image: string;
   nameBn: string;
   today: number;
@@ -25,7 +24,7 @@ const ProductCard = ({ product }: { product: IProduct }) => {
 
   return (
     <Link
-      href={`/product/${product.slug}`}
+      href={`/product/${product.id}`}
       className="card bg-white border border-gray-200 hover:border-teal-600 hover:shadow-md transition rounded-2xl p-4 flex flex-col justify-between gap-4"
     >
       {/* Top: Emoji + Name + Unit */}

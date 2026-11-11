@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 
 interface INavbar {
   id: string;
-  slug: string;
   nameBn: string;
   icon: string;
 }
@@ -26,11 +25,11 @@ const Navbar = () => {
     <nav className="border-y border-gray-200 py-3">
       <div className="container mx-auto px-4 flex flex-wrap items-center gap-2 sm:gap-6">
         {navData.map((n) => {
-          const isActive = pathname === `/category/${n.slug}`;
+          const isActive = pathname === `/category/${n.id}`;
           return (
             <Link
               key={n.id}
-              href={`/category/${n.slug}`}
+              href={`/category/${n.id}`}
               className={`px-3 py-1.5 rounded-lg text-sm sm:text-base transition ${
                 isActive
                   ? "bg-teal-700 text-white font-semibold"
