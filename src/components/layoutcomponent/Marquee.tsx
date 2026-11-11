@@ -25,6 +25,13 @@ const MarqueePage = async () => {
         {allProduct.map((p) => {
           const isUp = p?.change?.dir === "up" || p?.change?.dir === "▲";
           const isDown = p?.change?.dir === "down" || p?.change?.dir === "▼";
+          const unitMap: Record<string, string> = {
+            kg: "কেজি",
+            litre: "লিটার",
+            dozen: "ডজন",
+            piece: "পিস",
+          };
+          const unitBn = unitMap[p.unit] || p.unit;
 
           return (
             <div key={p.id} className="mx-3">
@@ -35,7 +42,7 @@ const MarqueePage = async () => {
                 <span>{p?.image}</span>
                 <span className="font-semibold">{p?.nameBn}</span>
                 <span>
-                  {p.today.toLocaleString("bn-BD")} টাকা/{p.unit}
+                  {p.today.toLocaleString("bn-BD")} টাকা/{unitBn}
                 </span>
                 <span
                   className={`text-xs sm:text-sm font-semibold ${
@@ -47,7 +54,7 @@ const MarqueePage = async () => {
                   }`}
                 >
                   {isUp ? "▲" : isDown ? "▼" : "—"}{" "}
-                  {p?.change?.pct?.toLocaleString("bn-BD")}%
+                  {Math.abs(p?.change?.pct || 0).toLocaleString("bn-BD")}%
                 </span>
               </Link>
             </div>

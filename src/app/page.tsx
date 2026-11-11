@@ -16,7 +16,7 @@ export default async function Home() {
   // Section B: Top 6 Fallers (আজ দাম কমেছে ▼)
   const topFallers = allProducts
     .filter((p) => p?.change?.dir === "down" || p?.change?.dir === "▼")
-    .sort((a, b) => b.change.pct - a.change.pct)
+    .sort((a, b) => Math.abs(b.change.pct) - Math.abs(a.change.pct))
     .slice(0, 6);
 
   return (

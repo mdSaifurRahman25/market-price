@@ -18,9 +18,13 @@ const ProductCard = ({ product }: { product: IProduct }) => {
   const isDown =
     product?.change?.dir === "down" || product?.change?.dir === "▼";
 
-  const unitText = product?.unit?.startsWith("প্রতি")
-    ? product.unit
-    : `প্রতি ${product?.unit}`;
+  const unitMap: Record<string, string> = {
+    kg: "কেজি",
+    litre: "লিটার",
+    dozen: "ডজন",
+    piece: "পিস",
+  };
+  const unitText = `প্রতি ${unitMap[product?.unit] || product?.unit}`;
 
   return (
     <Link
@@ -59,7 +63,7 @@ const ProductCard = ({ product }: { product: IProduct }) => {
           }`}
         >
           {isUp ? "▲" : isDown ? "▼" : "—"}{" "}
-          {product?.change?.pct?.toLocaleString("bn-BD")}%
+          {Math.abs(product?.change?.pct || 0).toLocaleString("bn-BD")}%
         </span>
       </div>
     </Link>
