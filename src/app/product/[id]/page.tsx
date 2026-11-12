@@ -1,5 +1,10 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
+import toast from "react-hot-toast";
+import { useSession } from "@/lib/auth-client";
 
 interface IMarket {
   market: string;
@@ -19,8 +24,6 @@ interface IProductDetails {
   image: string;
   today: number;
   yesterday: number;
-  lastWeek?: number;
-  lastMonth?: number;
   change: {
     dir: string;
     pct: number;
@@ -28,25 +31,104 @@ interface IProductDetails {
   markets: IMarket[];
 }
 
-const ProductDetailsPage = async ({
-  params,
-}: {
-  params: Promise<{ id: string }>;
-}) => {
-  const { id } = await params;
+const ProductDetailsPage = () => {
+  const params = useParams();
+  const router = useRouter();
+  const id = params?.id as string;
 
-  const res = await fetch(
-    `https://openapi.programming-hero.com/api/bazardor/products/${id}`
-  );
+  const { data: session, isPending } = useSession();
+  const [product, setProduct] = useState<IProductDetails | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [notFoundError, setNotFoundError] = useState<boolean>(false);
+  const toastShown = useRef(false);
 
-  if (!res.ok) {
-    notFound();
+  // প্রোটেক্টেড রাউট চেক: লগইন না থাকলে টোস্ট দেখিয়ে সাইন ইন পেজে পাঠানো
+  useEffect(() => {
+    if (!isPending && !session?.user) {
+      if (!toastShown.current) {
+        toastShown.current = true;
+        toast.error("পণ্যের বিস্তারিত দেখতে অনুগ্রহ করে সাইন ইন করুন!");
+      }
+      router.push("/signin");
+    }
+  }, [isPending, session, router]);
+
+  // প্রোডাক্টের বিস্তারিত ডাটা ফেচ করা
+  useEffect(() => {
+    if (isPending || !session?.user || !id) return;
+
+    setLoading(true);
+    fetch(`https://openapi.programming-hero.com/api/bazardor/products/${id}`)
+      .then((res) => {
+        if (!res.ok) {
+          setNotFoundError(true);
+          setLoading(false);
+          return null;
+        }
+        return res.json();
+      })
+      .then((data) => {
+        if (data && data.id) {
+          setProduct(data);
+        } else {
+          setNotFoundError(true);
+        }
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error(err);
+        setNotFoundError(true);
+        setLoading(false);
+      });
+  }, [id, isPending, session]);
+
+  // সেশন বা ডাটা লোড হওয়ার সময় স্কেলেটন লোডার
+  if (isPending || loading) {
+    return (
+      <div className="container mx-auto px-4 py-8 space-y-8">
+        <div className="skeleton h-4 w-48"></div>
+        <div className="bg-gray-100 rounded-2xl p-6 sm:p-8 flex flex-col md:flex-row justify-between gap-6">
+          <div className="flex items-center gap-4">
+            <div className="skeleton w-20 h-20 rounded-2xl"></div>
+            <div className="space-y-3">
+              <div className="skeleton h-5 w-32 rounded-full"></div>
+              <div className="skeleton h-8 w-52"></div>
+              <div className="skeleton h-4 w-64"></div>
+            </div>
+          </div>
+          <div className="skeleton h-24 w-44 rounded-2xl"></div>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div className="skeleton h-28 rounded-2xl"></div>
+          <div className="skeleton h-28 rounded-2xl"></div>
+          <div className="skeleton h-28 rounded-2xl"></div>
+        </div>
+        <div className="skeleton h-80 rounded-2xl"></div>
+      </div>
+    );
   }
 
-  const product: IProductDetails = await res.json();
-
-  if (!product || !product.id) {
-    notFound();
+  // ভুল প্রোডাক্ট আইডি হলে ৪০৪ পেজ দেখানো
+  if (notFoundError || !product) {
+    return (
+      <div className="container mx-auto px-4 py-20 text-center">
+        <div className="max-w-md mx-auto bg-gray-50 border border-gray-200 rounded-2xl p-8 space-y-4">
+          <p className="text-6xl font-bold text-teal-700">৪০৪</p>
+          <h1 className="text-2xl font-bold text-gray-900">
+            পণ্যটি খুঁজে পাওয়া যায়নি
+          </h1>
+          <p className="text-gray-600 text-sm sm:text-base">
+            দুঃখিত, আপনি যে পণ্যটি খুঁজছেন তা ডাটাবেজে পাওয়া যায়নি।
+          </p>
+          <Link
+            href="/"
+            className="btn bg-teal-700 hover:bg-teal-800 text-white border-none mt-2"
+          >
+            হোম পেজে ফিরে যান
+          </Link>
+        </div>
+      </div>
+    );
   }
 
   const isUp = product?.change?.dir === "up" || product?.change?.dir === "▲";

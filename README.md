@@ -5,10 +5,7 @@
 BazarDor is a responsive price-tracking web app for everyday essentials such as rice, lentils, oil, vegetables, fish, meat, eggs, milk and spices. It shows today's price, the daily change, and a market-by-market price breakdown for each product, all in Bangla.
 
 🔗 **Live demo:** [market-price-project.vercel.app](https://market-price-project.vercel.app)
-📦 **Repository:** <!-- UPDATE: paste your GitHub repository link -->
-
-<!-- UPDATE: add a screenshot or GIF of the home page, for example: -->
-<!-- ![BazarDor home page](./public/screenshots/home.png) -->
+📦 **Repository:** [github.com/mdSaifurRahman25/market-price](https://github.com/mdSaifurRahman25/market-price)
 
 ---
 
@@ -31,9 +28,9 @@ BazarDor is a responsive price-tracking web app for everyday essentials such as 
 | Area | Technology |
 |---|---|
 | Framework | [Next.js](https://nextjs.org/) (App Router) |
-| Language | <!-- UPDATE: TypeScript or JavaScript --> TypeScript |
-| Styling | [Tailwind CSS](https://tailwindcss.com/) with <!-- UPDATE: DaisyUI or HeroUI --> DaisyUI |
-| Authentication | [Better Auth](https://better-auth.com/) (email/password, Google, GitHub) |
+| Language | TypeScript |
+| Styling | [Tailwind CSS](https://tailwindcss.com/) with DaisyUI |
+| Authentication | [Better Auth](https://better-auth.com/) + MongoDB (email/password, Google, GitHub) |
 | Notifications | [react-hot-toast](https://react-hot-toast.com/) |
 | Data | BazarDor REST API (see below) |
 | Deployment | [Vercel](https://vercel.com/) |
@@ -45,15 +42,13 @@ BazarDor is a responsive price-tracking web app for everyday essentials such as 
 | Route | Description | Access |
 |---|---|---|
 | `/` | Hero, price ticker, risers, fallers and all products | Public |
-| `/category/[slug]` | Products of one category, with sorting | Public |
-| `/product/[slug]` | Price summary and market-wise prices | **Protected** |
+| `/category/[id]` | Products of one category, with sorting | Public |
+| `/product/[id]` | Price summary and market-wise prices | **Protected** |
 | `/signin` | Sign in with email, Google or GitHub | Public |
 | `/signup` | Create a new account | Public |
 | `/profile` | View account information | **Protected** |
 | `/profile/update` | Update your name | **Protected** |
 | `*` | Custom 404 page | Public |
-
-<!-- UPDATE: adjust the route names above if your project uses different ones -->
 
 ---
 
@@ -109,6 +104,10 @@ Create a `.env.local` file in the project root. Never commit this file.
 # Better Auth
 BETTER_AUTH_SECRET=your_random_secret
 BETTER_AUTH_URL=http://localhost:3000
+NEXT_PUBLIC_AUTH_URI=http://localhost:3000
+
+# MongoDB Database
+MONGODB_URI=
 
 # Google OAuth
 GOOGLE_CLIENT_ID=
@@ -117,12 +116,7 @@ GOOGLE_CLIENT_SECRET=
 # GitHub OAuth
 GITHUB_CLIENT_ID=
 GITHUB_CLIENT_SECRET=
-
-# Database for Better Auth
-DATABASE_URL=
 ```
-
-<!-- UPDATE: keep only the variables your project really uses, and commit a .env.example with the names only -->
 
 ### Scripts
 
@@ -141,18 +135,16 @@ DATABASE_URL=
 src/
 ├── app/
 │   ├── page.tsx                 home page
-│   ├── category/[slug]/         category pages
-│   ├── product/[slug]/          product details (protected)
-│   ├── signin/  signup/         authentication pages
-│   ├── profile/                 profile and update form
+│   ├── loading.tsx              home loading skeleton
 │   ├── not-found.tsx            custom 404 page
+│   ├── category/[id]/           category pages with price sorting
+│   ├── product/[id]/            product details (protected)
+│   ├── signin/  signup/         authentication pages
+│   ├── profile/                 profile and update form (protected)
 │   └── api/auth/[...all]/       Better Auth handler
-├── components/                  Navbar, Ticker, Hero, ProductCard, Footer, skeletons
-├── lib/                         auth config, API helpers, Bangla number utilities
-└── types/                       shared TypeScript types
+├── components/                  Header, Navbar, Marquee, Hero, ProductCard, Footer
+└── lib/                         Better Auth server & client config
 ```
-
-<!-- UPDATE: change this tree to match your real folders -->
 
 ---
 
