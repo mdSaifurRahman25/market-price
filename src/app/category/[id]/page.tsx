@@ -45,7 +45,6 @@ const CategoryPage = () => {
 
   useEffect(() => {
     if (!id) return;
-    setLoading(true);
     fetch(
       `https://openapi.programming-hero.com/api/bazardor/products?category=${id}`
     )

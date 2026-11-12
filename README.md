@@ -159,11 +159,11 @@ src/
 
 ## ☁️ Deployment
 
-The app is deployed on Vercel. Dynamic routes such as `/category/[slug]` and `/product/[slug]` work after a page reload. When deploying your own copy:
+The app is deployed on Vercel. Dynamic routes such as `/category/[id]` and `/product/[id]` work after a page reload. When deploying your own copy:
 
 1. Import the repository into Vercel.
 2. Add all environment variables from the section above.
-3. Set `BETTER_AUTH_URL` to your live URL.
+3. Set `BETTER_AUTH_URL` and `NEXT_PUBLIC_AUTH_URI` to your live URL.
 4. Add the live URL's callback address to your Google and GitHub OAuth apps.
 
 ---
@@ -181,8 +181,7 @@ The app is deployed on Vercel. Dynamic routes such as `/category/[slug]` and `/p
 
 **Md Saifur Rahman**
 
-- GitHub: <!-- UPDATE: your GitHub profile link -->
-- LinkedIn: <!-- UPDATE: your LinkedIn profile link -->
+- GitHub: [github.com/mdSaifurRahman25](https://github.com/mdSaifurRahman25)
 
 ---
 

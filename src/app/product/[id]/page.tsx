@@ -57,7 +57,6 @@ const ProductDetailsPage = () => {
   useEffect(() => {
     if (isPending || !session?.user || !id) return;
 
-    setLoading(true);
     fetch(`https://openapi.programming-hero.com/api/bazardor/products/${id}`)
       .then((res) => {
         if (!res.ok) {

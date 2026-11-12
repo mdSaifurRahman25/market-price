@@ -9,16 +9,11 @@ import { authClient, useSession } from "@/lib/auth-client";
 const UpdateProfilePage = () => {
   const router = useRouter();
   const { data: session, isPending } = useSession();
-  const [name, setName] = useState("");
+  const [name, setName] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const toastShown = useRef(false);
 
-  // ইউজারের বর্তমান নাম ইনপুটে বসানো
-  useEffect(() => {
-    if (session?.user?.name) {
-      setName(session.user.name);
-    }
-  }, [session]);
+  const currentName = name !== null ? name : session?.user?.name || "";
 
   // লগইন না থাকলে টোস্ট দেখিয়ে সাইন ইন পেজে পাঠানো
   useEffect(() => {
@@ -35,7 +30,7 @@ const UpdateProfilePage = () => {
   const handleUpdateName = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!name.trim()) {
+    if (!currentName.trim()) {
       toast.error("অনুগ্রহ করে আপনার নাম লিখুন।");
       return;
     }
@@ -43,7 +38,7 @@ const UpdateProfilePage = () => {
     setLoading(true);
     try {
       const { error } = await authClient.updateUser({
-        name: name.trim(),
+        name: currentName.trim(),
       });
 
       if (error) {
@@ -92,7 +87,7 @@ const UpdateProfilePage = () => {
             </label>
             <input
               type="text"
-              value={name}
+              value={currentName}
               onChange={(e) => setName(e.target.value)}
               placeholder="আপনার নতুন নাম লিখুন"
               className="input input-bordered w-full rounded-xl"
