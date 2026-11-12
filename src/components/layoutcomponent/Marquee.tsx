@@ -58,9 +58,9 @@ const MarqueePage = () => {
                 <span
                   className={`text-xs sm:text-sm font-semibold ${
                     isUp
-                      ? "text-green-600"
+                      ? "text-red-600"
                       : isDown
-                      ? "text-red-500"
+                      ? "text-emerald-600"
                       : "text-gray-500"
                   }`}
                 >

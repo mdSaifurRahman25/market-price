@@ -24,15 +24,13 @@ export default async function Home() {
       {/* Hero Banner */}
       <HeroSection />
 
-      {/* Section A — আজ দাম বেড়েছে ▲ */}
+      {/* Section A — ▲ আজ দাম বেড়েছে */}
       <section className="container mx-auto px-4">
         <div className="flex items-center gap-2 mb-5">
+          <span className="text-red-600 text-sm sm:text-base font-bold">▲</span>
           <h2 className="text-xl sm:text-2xl font-bold text-gray-900">
             আজ দাম বেড়েছে
           </h2>
-          <span className="bg-green-100 text-green-700 text-sm font-bold px-2.5 py-0.5 rounded-full">
-            ▲
-          </span>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -42,15 +40,15 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* Section B — আজ দাম কমেছে ▼ */}
+      {/* Section B — ▼ আজ দাম কমেছে */}
       <section className="container mx-auto px-4">
         <div className="flex items-center gap-2 mb-5">
+          <span className="text-emerald-600 text-sm sm:text-base font-bold">
+            ▼
+          </span>
           <h2 className="text-xl sm:text-2xl font-bold text-gray-900">
             আজ দাম কমেছে
           </h2>
-          <span className="bg-red-100 text-red-600 text-sm font-bold px-2.5 py-0.5 rounded-full">
-            ▼
-          </span>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -71,7 +69,7 @@ export default async function Home() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {allProducts.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}

@@ -36,6 +36,7 @@ const HeroSection = () => {
             alt="Hero Image"
             width={420}
             height={420}
+            priority
             className="w-64 sm:w-80 md:w-96 h-auto object-contain"
           />
         </div>

@@ -227,9 +227,9 @@ const ProductDetailsPage = () => {
           <span
             className={`px-3 py-1 rounded-full text-xs sm:text-sm font-semibold ${
               isUp
-                ? "bg-green-100 text-green-700"
+                ? "bg-red-50 text-red-600"
                 : isDown
-                ? "bg-red-100 text-red-600"
+                ? "bg-emerald-50 text-emerald-700"
                 : "bg-gray-100 text-gray-600"
             }`}
           >
@@ -247,7 +247,7 @@ const ProductDetailsPage = () => {
           {/* Minimum Price */}
           <div className="bg-white border border-gray-200 rounded-2xl p-5 space-y-1">
             <p className="text-sm text-gray-500">সর্বনিম্ন দাম</p>
-            <p className="text-2xl sm:text-3xl font-bold text-green-700">
+            <p className="text-2xl sm:text-3xl font-bold text-emerald-700">
               {lowestMarket
                 ? `${lowestMarket.min.toLocaleString("bn-BD")} টাকা`
                 : `${product.today.toLocaleString("bn-BD")} টাকা`}
@@ -296,19 +296,25 @@ const ProductDetailsPage = () => {
         </h2>
 
         <div className="bg-white border border-gray-200 rounded-2xl overflow-hidden">
-          <div className="overflow-x-auto">
-            <table className="table w-full text-sm sm:text-base">
+          <div className="w-full overflow-x-auto">
+            <table className="w-full text-xs sm:text-base">
               <thead className="bg-gray-100 text-gray-700 text-xs sm:text-sm">
                 <tr>
-                  <th className="py-3.5 px-4 text-left font-semibold">বাজার</th>
-                  <th className="py-3.5 px-4 text-left font-semibold">বিভাগ</th>
-                  <th className="py-3.5 px-4 text-right font-semibold">
+                  <th className="py-3 px-2.5 sm:px-4 text-left font-semibold">
+                    বাজার
+                  </th>
+                  <th className="py-3 px-2 sm:px-4 text-left font-semibold">
+                    বিভাগ
+                  </th>
+                  <th className="py-3 px-2 sm:px-4 text-right font-semibold whitespace-nowrap">
                     সর্বনিম্ন
                   </th>
-                  <th className="py-3.5 px-4 text-right font-semibold">
+                  <th className="py-3 px-2 sm:px-4 text-right font-semibold whitespace-nowrap">
                     সর্বাধিক
                   </th>
-                  <th className="py-3.5 px-4 text-right font-semibold">গড়</th>
+                  <th className="py-3 px-2.5 sm:px-4 text-right font-semibold whitespace-nowrap">
+                    গড়
+                  </th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-100">
@@ -316,21 +322,21 @@ const ProductDetailsPage = () => {
                   const avg = (m.min + m.max) / 2;
                   return (
                     <tr key={index} className="hover:bg-gray-50">
-                      <td className="py-3.5 px-4 font-medium text-gray-900">
+                      <td className="py-3 px-2.5 sm:px-4 font-medium text-gray-900">
                         {m.market}
                       </td>
-                      <td className="py-3.5 px-4 text-gray-600">
-                        <span className="bg-gray-100 px-2.5 py-0.5 rounded-full text-xs">
+                      <td className="py-3 px-2 sm:px-4 text-gray-600 whitespace-nowrap">
+                        <span className="bg-gray-100 px-2 py-0.5 rounded-full text-[11px] sm:text-xs">
                           {m.division}
                         </span>
                       </td>
-                      <td className="py-3.5 px-4 text-right text-green-700 font-medium">
+                      <td className="py-3 px-2 sm:px-4 text-right text-emerald-700 font-medium whitespace-nowrap">
                         {m.min.toLocaleString("bn-BD")} টাকা
                       </td>
-                      <td className="py-3.5 px-4 text-right text-red-600 font-medium">
+                      <td className="py-3 px-2 sm:px-4 text-right text-red-600 font-medium whitespace-nowrap">
                         {m.max.toLocaleString("bn-BD")} টাকা
                       </td>
-                      <td className="py-3.5 px-4 text-right font-bold text-gray-900">
+                      <td className="py-3 px-2.5 sm:px-4 text-right font-bold text-gray-900 whitespace-nowrap">
                         {avg.toLocaleString("bn-BD")} টাকা
                       </td>
                     </tr>

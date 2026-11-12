@@ -56,9 +56,9 @@ const ProductCard = ({ product }: { product: IProduct }) => {
         <span
           className={`px-2.5 py-1 rounded-full text-xs sm:text-sm font-semibold ${
             isUp
-              ? "bg-green-100 text-green-700"
+              ? "bg-red-50 text-red-600"
               : isDown
-              ? "bg-red-100 text-red-600"
+              ? "bg-emerald-50 text-emerald-700"
               : "bg-gray-100 text-gray-600"
           }`}
         >
