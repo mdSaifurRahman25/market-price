@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import Marquee from "react-fast-marquee";
 
 interface IMarquee {
@@ -13,11 +16,19 @@ interface IMarquee {
   };
 }
 
-const MarqueePage = async () => {
-  const res = await fetch(
-    "https://openapi.programming-hero.com/api/bazardor/products"
-  );
-  const allProduct: IMarquee[] = await res.json();
+const MarqueePage = () => {
+  const [allProduct, setAllProduct] = useState<IMarquee[]>([]);
+
+  useEffect(() => {
+    fetch("https://openapi.programming-hero.com/api/bazardor/products")
+      .then((res) => res.json())
+      .then((data) => setAllProduct(Array.isArray(data) ? data : []))
+      .catch((err) => console.error(err));
+  }, []);
+
+  if (allProduct.length === 0) {
+    return null;
+  }
 
   return (
     <Marquee pauseOnHover speed={40}>
