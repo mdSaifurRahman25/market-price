@@ -120,6 +120,18 @@ GITHUB_CLIENT_SECRET=
 
 ### Scripts
 
+## Images 
+<img width="1337" height="945" alt="marketprice1" src="https://github.com/user-attachments/assets/ef208e31-1fc5-4df1-ac70-e4a759d7f784" />
+<img width="1269" height="949" alt="marketprice2" src="https://github.com/user-attachments/assets/f182c3c2-fb97-4073-811f-c66ccd1571b3" /> 
+<img width="1242" height="948" alt="marketprice3" src="https://github.com/user-attachments/assets/552c5c71-8577-4675-98bd-253eacd44de9" /> 
+<img width="1266" height="949" alt="marketprice4" src="https://github.com/user-attachments/assets/2fba1769-843a-400a-b222-300bb3c24941" />
+<img width="1296" height="945" alt="marketprice5" src="https://github.com/user-attachments/assets/23ee4b24-2403-4688-b56b-413f914afcc9" />
+
+
+
+
+
+
 | Command | Description |
 |---|---|
 | `npm run dev` | Start the development server |
